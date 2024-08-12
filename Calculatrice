@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <!-- <link href="output.css" rel="stylesheet"> -->
+</head>
+<body class="m-0 p-0 box-border">
+    <div class="bg-gray-400 w-full h-screen flex items-center justify-center">
+        <div class="bg-black w-1/5 h-4/6 grid grid-cols-1 grid-rows-[1fr_3fr] p-4 gap-3 ">
+            <div class="h-15 bg-blue-300 text-5xl flex justify-end items-end pr-2 pb-2">
+                <div id="screen">0</div>
+            </div>
+            <div class="h- grid grid-cols-4 grid-rows-5 gap-2">
+                <div class="col-span-4 grid grid-cols-4 grid-rows-1 gap-1">
+                    <div class="text-white bg-red-700 text-center cursor-pointer" id="Clear">C</div>
+                    <div class="text-black bg-white text-center cursor-pointer" id="para_left">(</div>
+                    <div class="text-black bg-white text-center cursor-pointer" id="para_right">)</div>
+                    <div class="text-black bg-white text-center cursor-pointer" id="slash">/</div>
+                </div>
+                <div class="col-span-4 grid grid-cols-4 grid-rows-1 gap-1">
+                    <div class="text-black bg-white text-center cursor-pointer" id="seven">7</div>
+                    <div class="text-black bg-white text-center cursor-pointer" id="height">8</div>
+                    <div class="text-black bg-white text-center cursor-pointer" id="nine">9</div>
+                    <div class="text-black bg-white text-center cursor-pointer" id="star">*</div>
+                </div>
+                <div class="col-span-4 grid grid-cols-4 grid-rows-1 gap-1">
+                    <div class="text-black bg-white text-center cursor-pointer" id="four">4</div>
+                    <div class="text-black bg-white text-center cursor-pointer" id="five">5</div>
+                    <div class="text-black bg-white text-center cursor-pointer" id="six">6</div>
+                    <div class="text-black bg-white text-center cursor-pointer" id="minus">-</div>
+                </div>
+                <div class="col-span-4 grid grid-cols-4 grid-rows-1 gap-1">
+                    <div class="text-black bg-white text-center cursor-pointer" id="one">1</div>
+                    <div class="text-black bg-white text-center cursor-pointer" id="two">2</div>
+                    <div class="text-black bg-white text-center cursor-pointer" id="three">3</div>
+                    <div class="text-black bg-white text-center cursor-pointer" id="plus">+</div>
+                </div>
+                <div class="col-span-4 grid grid-cols-4 grid-rows-1 gap-1">
+                    <div class="text-black bg-white text-center cursor-pointer" id="zero">0</div>
+                    <div class="text-black bg-white text-center cursor-pointer" id="dot">.</div>
+                    <div class="text-white bg-green-500 col-span-2 text-center cursor-pointer" id="equal">=</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let screen = document.getElementById('screen');
+        let clear = document.getElementById('Clear')
+        let para_left = document.getElementById('para_left')
+        let para_right = document.getElementById('para_right')
+        let slash = document.getElementById('slash')
+        let seven = document.getElementById('seven')
+        let height = document.getElementById('height')
+        let nine = document.getElementById('nine')
+        let star = document.getElementById('star')
+        let four = document.getElementById('four')
+        let five = document.getElementById('five')
+        let six = document.getElementById('six')
+        let minus = document.getElementById('minus')
+        let one = document.getElementById('one')
+        let two = document.getElementById('two')
+        let three = document.getElementById('three')
+        let plus = document.getElementById('plus')
+        let zero = document.getElementById('zero')
+        let dot = document.getElementById('dot')
+        let equal = document.getElementById('equal')
+        let expression = '';  // Cette variable stockera l'expression mathématique
+
+        // Fonction pour ajouter un caractère à l'expression
+        function appendToExpression(value) {
+        if (expression === '0') {
+            expression = value;  // Remplacer 0 si c'est le premier caractère saisi
+        } else {
+            expression += value; // Ajouter le caractère à l'expression
+        }
+        screen.textContent = expression; // Afficher l'expression sur l'écran
+        }
+
+        // Ajout des événements de clic pour chaque bouton
+        clear.addEventListener('click', function() {
+        expression = '0'; // Réinitialiser l'expression
+        screen.textContent = expression; // Afficher "0" à l'écran
+        });
+
+        para_left.addEventListener('click', function() { appendToExpression('('); });
+        para_right.addEventListener('click', function() { appendToExpression(')'); });
+        slash.addEventListener('click', function() { appendToExpression('/'); });
+        seven.addEventListener('click', function() { appendToExpression('7'); });
+        height.addEventListener('click', function() { appendToExpression('8'); });
+        nine.addEventListener('click', function() { appendToExpression('9'); });
+        star.addEventListener('click', function() { appendToExpression('*'); });
+        four.addEventListener('click', function() { appendToExpression('4'); });
+        five.addEventListener('click', function() { appendToExpression('5'); });
+        six.addEventListener('click', function() { appendToExpression('6'); });
+        minus.addEventListener('click', function() { appendToExpression('-'); });
+        one.addEventListener('click', function() { appendToExpression('1'); });
+        two.addEventListener('click', function() { appendToExpression('2'); });
+        three.addEventListener('click', function() { appendToExpression('3'); });
+        plus.addEventListener('click', function() { appendToExpression('+'); });
+        zero.addEventListener('click', function() { appendToExpression('0'); });
+        dot.addEventListener('click', function() { appendToExpression('.'); });
+
+        equal.addEventListener('click', function() {
+        try {
+            let result = eval(expression);
+            screen.textContent = result;
+            expression = result.toString();
+        } catch (e) {
+            screen.textContent = 'Error'; // Afficher une erreur si l'expression est invalide
+            expression = '0'; // Réinitialiser l'expression
+        }
+        });
+
+    </script>
+</body>
+</html>
